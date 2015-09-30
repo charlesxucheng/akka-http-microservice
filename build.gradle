@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+
+
+apply plugin: 'scala'
+apply plugin: 'eclipse'
+
+jar {
+    baseName = 'akka-http-slick-streaming-ws'
+    version =  '1.0.0-SNAPSHOT'
+}
+
+repositories {
+    mavenCentral()
+	maven {
+        url "http://repo.typesafe.com/typesafe/maven-releases/"
+    }
+}
+
+ext {
+	jerseyVersion = '2.21'
+}
+
+dependencies {
+    compile "org.hsqldb:hsqldb:2.3.3"
+	compile "com.typesafe.slick:slick_2.11:3.0.0"
+	compile "com.typesafe.slick:slick-extensions_2.11:3.0.0"
+     
+	compile "com.typesafe.akka:akka-stream-experimental_2.11:1.0"
+	compile "com.typesafe.akka:akka-http-core-experimental_2.11:1.0"
+    compile "com.typesafe.akka:akka-http-experimental_2.11:1.0"
+	compile "com.typesafe.akka:akka-http-spray-json-experimental_2.11:1.0"
+	compile "com.typesafe.akka:akka-actor_2.11:2.3.12"
+
+	runtime files("lib/ojdbc7.jar")
+		
+	compile "org.scaldi:scaldi_2.11:0.5.5"
+	compile "org.scaldi:scaldi-akka_2.11:0.5.5"
+
+	testCompile "junit:junit:4.12"
+    testCompile "com.typesafe.akka:akka-http-testkit-experimental_2.11:1.0"
+	testCompile "org.scalatest:scalatest_2.11:2.2.5"
+
+//	testCompile "com.typesafe.akka:akka-testkit_2.11:2.3.12"
+}
+
+    
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+}

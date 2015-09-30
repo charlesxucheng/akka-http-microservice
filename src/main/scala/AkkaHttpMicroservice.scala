@@ -30,11 +30,11 @@ object IpPairSummary {
     (ip1Info.latitude, ip1Info.longitude, ip2Info.latitude, ip2Info.longitude) match {
       case (Some(lat1), Some(lon1), Some(lat2), Some(lon2)) =>
         // see http://www.movable-type.co.uk/scripts/latlong.html
-        val φ1 = toRadians(lat1)
-        val φ2 = toRadians(lat2)
-        val Δφ = toRadians(lat2 - lat1)
-        val Δλ = toRadians(lon2 - lon1)
-        val a = pow(sin(Δφ / 2), 2) + cos(φ1) * cos(φ2) * pow(sin(Δλ / 2), 2)
+        val Phi1 = toRadians(lat1)
+        val Phi2 = toRadians(lat2)
+        val dPhi = toRadians(lat2 - lat1)
+        val dLambda = toRadians(lon2 - lon1)
+        val a = pow(sin(dPhi / 2), 2) + cos(Phi1) * cos(Phi2) * pow(sin(dLambda / 2), 2)
         val c = 2 * atan2(sqrt(a), sqrt(1 - a))
         Option(EarthRadius * c)
       case _ => None
